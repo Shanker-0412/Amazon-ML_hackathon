@@ -1,0 +1,48 @@
+tensorflow==2.9.0
+numpy
+pandas
+requests
+Pillow
+scikit-learn
+
+ if entity in ["width", "depth", "height"]:
+        if unit in ["metre", "foot", "yard"]:
+            return f"{value} {unit}"
+        elif unit == "centimetre" and value >= 100:
+            return f"{value / 100} metre"
+        elif unit == "millimetre" and value >= 1000:
+            return f"{value / 1000} metre"
+        elif unit == "inch" and value >= 36:
+            return f"{value / 36} yard"
+    elif entity in ["item_weight", "maximum_weight_recommendation"]:
+        if unit in ["ton", "pound"]:
+            return f"{value} {unit}"
+        elif unit == "kilogram" and value >= 1000:
+            return f"{value / 1000} ton"
+        elif unit == "gram" and value >= 1000:
+            return f"{value / 1000} kilogram"
+        elif unit in ["milligram", "microgram"] and value >= 1000000:
+            return f"{value / 1000000} kilogram"
+        elif unit == "ounce" and value >= 16:
+            return f"{value / 16} pound"
+    elif entity == "voltage":
+        if unit == "volt" and value >= 1000:
+            return f"{value / 1000} kilovolt"
+        elif unit == "millivolt" and value >= 1000:
+            return f"{value} volt"
+    elif entity == "wattage":
+        if unit == "watt" and value >= 1000:
+            return f"{value / 1000} kilowatt"
+    elif entity == "item_volume":
+        if unit in ["litre", "gallon", "imperial gallon"]:
+            return f"{value} {unit}"
+        elif unit in ["millilitre", "centilitre", "decilitre"] and value >= 1000:
+            return f"{value / 1000} litre"
+        elif unit == "cubic foot" and value >= 7.48052:
+            return f"{value / 7.48052} gallon"
+        elif unit in ["cup", "pint", "quart"] and value >= 4:
+            return f"{value / 4} gallon"
+        elif unit == "fluid ounce" and value >= 128:
+            return f"{value / 128} gallon"
+    
+    return f"{value} {unit}"
